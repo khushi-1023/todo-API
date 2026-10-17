@@ -56,12 +56,14 @@ function renderTodos() {
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
         deleteButton.className = "delete-btn";
-        deleteButton.addEventListener("click", function() {
-            todos = todos.filter(item => item.id !== todo.id);
-            if (editingTodoId === todo.id) resetForm();
-            saveTodos();
-            renderTodos();
-        });
+
+        deleteButton.addEventListener("click", function () {
+        const confirmDelete = confirm("Are you sure you want to delete this task?");
+
+          if (confirmDelete) {
+               deleteTodo(todo.id);
+           }
+    });
 
         actions.append(editButton, deleteButton);
         item.append(title, description, actions);
